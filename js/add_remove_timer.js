@@ -30,7 +30,7 @@ function createNewTimerDiv(id) {
   const timerDiv = `
             <div
             id=${id}
-            class="w-full h-2/3 lg:h-1/3 mt-5 flex flex-row border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
+            class="w-full h-2/3 md:h-1/3 mt-5 flex flex-row border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
             tabindex="0"
           >
             <div
@@ -38,12 +38,12 @@ function createNewTimerDiv(id) {
               class="w-2/3 h-full font-sans flex flex-col items-center justify-start text-md border border-slate-800 dark:border-slate-200"
             >
               <div
-                class="w-full h-2/3 flex flex-col lg:flex-row lg:space-x-7 items-center justify-center pr-10 border border:border-slate-200"
+                class="w-full h-full md:h-2/3 flex flex-col lg:flex-row lg:space-x-7 items-center justify-center pr-10 border border:border-slate-200"
                 id="timer-dash"
               >
-                <div class="flex flex-col text-right items-center lg:items-end">
+                <div class="flex flex-col text-right items-center md:items-end">
                   <input
-                    class="text-3xl w-1/3 h-2/3 lg:w-2/3 lg:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
                     type="number"
                     id="hours-entry"
                     min="0"
@@ -51,9 +51,9 @@ function createNewTimerDiv(id) {
                   />
                   <div>hours</div>
                 </div>
-                <div class="flex flex-col text-right items-center lg:items-end">
+                <div class="flex flex-col text-right items-center md:items-end">
                   <input
-                    class="text-3xl w-1/3 h-2/3 lg:w-2/3 lg:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
                     type="number"
                     id="minutes-entry"
                     min="0"
@@ -61,9 +61,9 @@ function createNewTimerDiv(id) {
                   />
                   <div>minutes</div>
                 </div>
-                <div class="flex flex-col text-right items-center lg:items-end">
+                <div class="flex flex-col text-right items-center md:items-end">
                   <input
-                    class="text-3xl w-1/3 h-2/3 lg:w-2/3 lg:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
                     type="number"
                     id="seconds-entry"
                     min="0"
