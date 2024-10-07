@@ -17,10 +17,15 @@ const resetButton = timerButtons.querySelector("#reset-button");
 let timerInterval;
 let isPlay = false;
 let isPaused = false;
-let isAlarmSound = false;
+let isAlarm = false;
 
 // import alarm functions
-import { playAlertSound, stopAlertSound } from "./alarm.js";
+import {
+  playAlertSound,
+  playFlashTitle,
+  stopAlertSound,
+  stopFlashTitle,
+} from "./alarm.js";
 
 window.addEventListener("load", () => {
   // Update the count down every 1 second
@@ -88,7 +93,8 @@ window.addEventListener("load", () => {
         if (distance <= 0) {
           clearInterval(timerInterval);
           playAlertSound();
-          isAlarmSound = true;
+          playFlashTitle();
+          isAlarm = true;
           // alertUser();
         }
       }
@@ -139,9 +145,10 @@ window.addEventListener("load", () => {
     clearInterval(timerInterval);
 
     // cancel alarm
-    if (isAlarmSound) {
+    if (isAlarm) {
       stopAlertSound();
-      isAlarmSound = false;
+      stopFlashTitle();
+      isAlarm = false;
     }
   }
 
