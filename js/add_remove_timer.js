@@ -8,7 +8,7 @@ removeTimerButton.addEventListener("click", () => {
 });
 
 addTimerButton.addEventListener("click", () => {
-  const id = 1;
+  const id = `my-timer-${2}`;
   const timerDiv = `
             <div
             id=${id}
