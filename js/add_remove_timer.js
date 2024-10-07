@@ -1,14 +1,31 @@
+import { TimerFunc } from "./timer.js";
+
 const timerContainer = document.querySelector("#timers-inner-container");
 const addTimerButton = document.querySelector("#add-timer-button");
 const removeTimerButton = document.querySelector("#remove-timer-button");
 
-removeTimerButton.addEventListener("click", () => {
-  const focusedElement = document.activeElement;
-  console.log(focusedElement);
-});
+let idCounter = 2;
 
-addTimerButton.addEventListener("click", () => {
-  const id = `my-timer-${2}`;
+export function createNewTimer(id) {
+  // create id namespace
+  const firstTimerName = `my-timer-${id}`;
+  const timerContainer = document.querySelector("#timers-inner-container");
+  const timerElement = timerContainer.querySelector(`#${firstTimerName}`);
+
+  // if it doesn't exist create it - both the div and timer functionality
+  if (!timerElement) {
+    // create new div
+    createNewTimerDiv(firstTimerName);
+
+    // pull new div from updated dom
+    let newTimerDiv = timerContainer.querySelector(`#${firstTimerName}`);
+
+    // create new timer functionality
+    let newTimerFunc = new TimerFunc(newTimerDiv);
+  }
+}
+
+function createNewTimerDiv(id) {
   const timerDiv = `
             <div
             id=${id}
@@ -102,8 +119,22 @@ addTimerButton.addEventListener("click", () => {
             </div>
           </div>`;
 
-  // Insert the new div into the target div
+  // insert new timer div into main dom element for timers
   timerContainer.insertAdjacentHTML("beforeend", timerDiv);
+}
 
-  console.log("hi");
+removeTimerButton.addEventListener("click", () => {
+  const focusedElement = document.activeElement;
+  console.log(focusedElement);
+  if (!focusedElement) {
+    console.log(focusedElement);
+  }
+});
+
+addTimerButton.addEventListener("click", () => {
+  // create new timer div
+  createNewTimer(idCounter);
+
+  // update counter
+  idCounter++;
 });

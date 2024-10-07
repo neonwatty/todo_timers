@@ -5,12 +5,11 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
-export class Timer {
+export class TimerFunc {
   constructor(timerElement) {
     this.timerElement = timerElement;
-    this.timerContainer = timerElement.querySelector("#timer-container");
-    this.timerDash = this.timerContainer.querySelector("#timer-dash");
-    this.timerButtons = this.timerContainer.querySelector("#timer-buttons");
+    this.timerDash = this.timerElement.querySelector("#timer-dash");
+    this.timerButtons = this.timerElement.querySelector("#timer-buttons");
 
     this.hoursEntry = this.timerDash.querySelector("#hours-entry");
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
@@ -33,11 +32,9 @@ export class Timer {
   }
 
   initialize() {
-    window.addEventListener("load", () => {
-      this.startButton.addEventListener("click", () => this.start());
-      this.pauseButton.addEventListener("click", () => this.pause());
-      this.resetButton.addEventListener("click", () => this.reset());
-    });
+    this.startButton.addEventListener("click", () => this.start());
+    this.pauseButton.addEventListener("click", () => this.pause());
+    this.resetButton.addEventListener("click", () => this.reset());
   }
 
   startTimer() {
@@ -55,6 +52,7 @@ export class Timer {
     let minutesToAdd = parseInt(this.minutesEntry.innerHTML);
     let secondsToAdd = parseInt(this.secondsEntry.innerHTML);
 
+    // function to create correct timer countdown
     const addTime = (hours, minutes, seconds) => {
       const currentDate = new Date();
       const currentTimeInMs = currentDate.getTime();
@@ -62,8 +60,10 @@ export class Timer {
       return currentTimeInMs + millisecondsToAdd + 100;
     };
 
+    // map countdown
     const countDownDate = addTime(hoursToAdd, minutesToAdd, secondsToAdd);
 
+    // create interal timer
     this.timerInterval = setInterval(() => {
       if (!this.isPaused) {
         let now = new Date().getTime();
@@ -129,6 +129,7 @@ export class Timer {
       stopFlashTitle();
       this.isAlarm = false;
     }
+    this.isPlay = false;
   }
 
   reset() {
