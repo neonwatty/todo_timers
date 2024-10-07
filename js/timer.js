@@ -8,6 +8,7 @@ const timerButtons = timerContainer.querySelector("#timer-buttons");
 let hoursEntry = timerDash.querySelector("#hours-entry");
 let minutesEntry = timerDash.querySelector("#minutes-entry");
 let secondsEntry = timerDash.querySelector("#seconds-entry");
+const originalTitle = document.title;
 
 // timer buttons
 const startButton = timerButtons.querySelector("#start-button");
@@ -16,6 +17,10 @@ const resetButton = timerButtons.querySelector("#reset-button");
 let timerInterval;
 let isPlay = false;
 let isPaused = false;
+let isAlarmSound = false;
+
+// import alarm functions
+import { playAlertSound, stopAlertSound } from "./alarm.js";
 
 window.addEventListener("load", () => {
   // Update the count down every 1 second
@@ -82,7 +87,9 @@ window.addEventListener("load", () => {
         // If the count down is finished, write some text
         if (distance <= 0) {
           clearInterval(timerInterval);
-          // document.getElementById("demo").innerHTML = "EXPIRED";
+          playAlertSound();
+          isAlarmSound = true;
+          // alertUser();
         }
       }
     }, 1000);
@@ -131,7 +138,11 @@ window.addEventListener("load", () => {
     // remove start event listener
     clearInterval(timerInterval);
 
-    // startButton.removeEventListener("click", start);
+    // cancel alarm
+    if (isAlarmSound) {
+      stopAlertSound();
+      isAlarmSound = false;
+    }
   }
 
   // add listener to start button
