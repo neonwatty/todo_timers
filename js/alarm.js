@@ -1,5 +1,6 @@
 const alertSound = document.getElementById("alertSound");
 const pageTitle = document.title;
+let titleFlasher;
 
 function playFlashTitle() {
   let flashCount = 0;

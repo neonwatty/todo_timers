@@ -19,10 +19,20 @@
       class="h-screen w-3/4 flex flex-col mx-auto my-10 border border-slate-800 dark:border-slate-200"
     >
       <div
-        class="mx-auto w-10 h-10 rounded-full text-3xl border border-slate-800 dark:border-slate-200 text-center text-slate-800 dark:text-slate-200 hover hover:text-slate-200 hover:bg-slate-600 cursor-pointer focus:bg-indigo-500 active active:bg-indigo-400"
-        id="add-timer-button"
+        class="flex flex-row w-full h-1/8 items-center justify-center space-x-5 mt-2"
       >
-        +
+        <div
+          class="w-10 h-10 rounded-full text-3xl border border-slate-800 dark:border-slate-200 text-center text-slate-800 dark:text-slate-200 hover hover:bg-emerald-500 cursor-pointer active active:bg-teal-500"
+          id="add-timer-button"
+        >
+          +
+        </div>
+        <div
+          class="w-10 h-10 rounded-full text-3xl border border-slate-800 dark:border-slate-200 text-center text-slate-800 dark:text-slate-200 hover hover:text-slate-200 hover:bg-red-500 cursor-pointer active active:bg-red-600"
+          id="delete-button"
+        >
+          -
+        </div>
       </div>
       <div
         class="w-2/3 h-full mx-auto mt-2 flex flex-col items-center text-slate-800 dark:text-slate-300 border border-slate-800 dark:border-slate-200"
@@ -108,8 +118,8 @@
                 type="text"
                 id="name"
                 name="name"
-                minlength="4"
-                maxlength="8"
+                minlength="0"
+                maxlength="30"
                 size="10"
                 class="bg-slate-300 dark:bg-slate-700 text-slate-800 dark:text-slate-200 mb-2"
               />
@@ -120,12 +130,6 @@
                 name="notes"
                 class="h-full bg-slate-300 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-left"
               ></textarea>
-            </div>
-            <div
-              class="mx-auto my-auto w-10 h-10 rounded-full text-3xl border border-slate-800 dark:border-slate-200 text-center text-slate-800 dark:text-slate-200 hover hover:text-slate-200 hover:bg-red-500 cursor-pointer active active:bg-red-600"
-              id="delete-button"
-            >
-              -
             </div>
           </div>
         </div>
