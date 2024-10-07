@@ -5,9 +5,14 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
+import { deleteDict, loadDict, saveDict } from "./localStorage.js";
+
+const timerContainer = document.querySelector("#timers-inner-container");
+
 export class TimerFunc {
-  constructor(timerElement) {
-    this.timerElement = timerElement;
+  constructor(timerName) {
+    this.timerName = timerName;
+    this.timerElement = timerContainer.querySelector(`#${timerName}`);
     this.timerDash = this.timerElement.querySelector("#timer-dash");
     this.timerButtons = this.timerElement.querySelector("#timer-buttons");
 
@@ -122,13 +127,18 @@ export class TimerFunc {
   }
 
   pause() {
+    // update pause flag
     this.isPaused = true;
+
+    // clear countdown interval
     clearInterval(this.timerInterval);
     if (this.isAlarm) {
       stopAlertSound();
       stopFlashTitle();
       this.isAlarm = false;
     }
+
+    // update play flag
     this.isPlay = false;
   }
 

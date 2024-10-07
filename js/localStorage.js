@@ -1,18 +1,13 @@
-// Function to save name-value pair to Local Storage
-function saveSlider(name, value) {
-  localStorage.setItem(name, value);
+export function saveDict(key, dict) {
+  localStorage.setItem(key, value);
+  localStorage.setItem(key, JSON.stringify(dict));
 }
 
-// Function to load name-value pairs from storage
-function loadSliders() {
-  // load each slider pair
-  const startSliderActual = localStorage.getItem("start_slider_actual");
-  return startSliderActual;
+export function loadDict(key) {
+  const retrievedDict = JSON.parse(localStorage.getItem(key));
+  return retrievedDict;
 }
 
-// Function to clear sliders from Local Storage
-function clearSliders() {
-  localStorage.removeItem("start_slider_actual");
+export function deleteDict(key) {
+  localStorage.removeItem(key);
 }
-
-export { clearSliders, loadSliders, saveSlider };
