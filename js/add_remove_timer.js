@@ -1,3 +1,4 @@
+import { updateFocus } from "./focus.js";
 import { TimerFunc } from "./timer.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
@@ -124,10 +125,10 @@ function createNewTimerDiv(id) {
 }
 
 removeTimerButton.addEventListener("click", () => {
-  const focusedElement = document.activeElement;
-  console.log(focusedElement);
-  if (!focusedElement) {
-    console.log(focusedElement);
+  const focusId = updateFocus();
+  const removeElement = document.getElementById(focusId);
+  if (removeElement) {
+    removeElement.remove();
   }
 });
 
