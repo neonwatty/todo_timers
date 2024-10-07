@@ -8,7 +8,6 @@ const timerButtons = timerContainer.querySelector("#timer-buttons");
 let hoursEntry = timerDash.querySelector("#hours-entry");
 let minutesEntry = timerDash.querySelector("#minutes-entry");
 let secondsEntry = timerDash.querySelector("#seconds-entry");
-const originalTitle = document.title;
 
 // timer buttons
 const startButton = timerButtons.querySelector("#start-button");
@@ -152,9 +151,34 @@ window.addEventListener("load", () => {
     }
   }
 
+  function reset() {
+    // turn off all alarms
+    if (isAlarm) {
+      stopAlertSound();
+      stopFlashTitle();
+      isAlarm = false;
+    }
+
+    // re-select inputs
+    hoursEntry = timerDash.querySelector("#hours-entry");
+    minutesEntry = timerDash.querySelector("#minutes-entry");
+    secondsEntry = timerDash.querySelector("#seconds-entry");
+
+    // reset html to input
+    hoursEntry.outerHTML =
+      '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="hours-entry" min="0" value="0" />';
+    minutesEntry.outerHTML =
+      '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="minutes-entry" min="0" value="0" />';
+    secondsEntry.outerHTML =
+      '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="seconds-entry" min="0" value="0" />';
+  }
+
   // add listener to start button
   startButton.addEventListener("click", start);
 
   // add listener to pause button
   pauseButton.addEventListener("click", pause);
+
+  // add listener for reset button
+  resetButton.addEventListener("click", reset);
 });
