@@ -1,24 +1,3 @@
-// get input timer digits
-const timer = document.getElementById("my-timer");
-const timerContainer = timer.querySelector("#timer-container");
-const timerDash = timerContainer.querySelector("#timer-dash");
-const timerButtons = timerContainer.querySelector("#timer-buttons");
-
-// timer dash
-let hoursEntry = timerDash.querySelector("#hours-entry");
-let minutesEntry = timerDash.querySelector("#minutes-entry");
-let secondsEntry = timerDash.querySelector("#seconds-entry");
-
-// timer buttons
-const startButton = timerButtons.querySelector("#start-button");
-const pauseButton = timerButtons.querySelector("#pause-button");
-const resetButton = timerButtons.querySelector("#reset-button");
-let timerInterval;
-let isPlay = false;
-let isPaused = false;
-let isAlarm = false;
-
-// import alarm functions
 import {
   playAlertSound,
   playFlashTitle,
@@ -26,159 +5,146 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
-window.addEventListener("load", () => {
-  // Update the count down every 1 second
-  function startTimer() {
-    // unpause if paused
-    if (isPaused) {
-      isPaused = false;
+class Timer {
+  constructor(timerElement) {
+    this.timerElement = timerElement;
+    this.timerContainer = timerElement.querySelector("#timer-container");
+    this.timerDash = this.timerContainer.querySelector("#timer-dash");
+    this.timerButtons = this.timerContainer.querySelector("#timer-buttons");
+
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+
+    this.startButton = this.timerButtons.querySelector("#start-button");
+    this.pauseButton = this.timerButtons.querySelector("#pause-button");
+    this.resetButton = this.timerButtons.querySelector("#reset-button");
+
+    this.timerInterval = null;
+    this.isPlay = false;
+    this.isPaused = false;
+    this.isAlarm = false;
+
+    this.initialize();
+  }
+
+  initialize() {
+    window.addEventListener("load", () => {
+      this.startButton.addEventListener("click", () => this.start());
+      this.pauseButton.addEventListener("click", () => this.pause());
+      this.resetButton.addEventListener("click", () => this.reset());
+    });
+  }
+
+  startTimer() {
+    if (this.isPaused) {
+      this.isPaused = false;
     }
 
     // re-select inputs
-    hoursEntry = timerDash.querySelector("#hours-entry");
-    minutesEntry = timerDash.querySelector("#minutes-entry");
-    secondsEntry = timerDash.querySelector("#seconds-entry");
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
 
-    // grab data from dash
-    let hoursToAdd = parseInt(hoursEntry.innerHTML);
-    let minutesToAdd = parseInt(minutesEntry.innerHTML);
-    let secondsToAdd = parseInt(secondsEntry.innerHTML);
+    // get timer values
+    let hoursToAdd = parseInt(this.hoursEntry.innerHTML);
+    let minutesToAdd = parseInt(this.minutesEntry.innerHTML);
+    let secondsToAdd = parseInt(this.secondsEntry.innerHTML);
 
-    // Function to add time in hours, minutes, and seconds
-    function addTime(hours, minutes, seconds) {
-      // Get the current date and time in milliseconds
-      let currentDate = new Date();
-      let currentTimeInMs = currentDate.getTime();
-
-      // compute time diff in miliseconds
+    const addTime = (hours, minutes, seconds) => {
+      const currentDate = new Date();
+      const currentTimeInMs = currentDate.getTime();
       const millisecondsToAdd = (hours * 3600 + minutes * 60 + seconds) * 1000;
       return currentTimeInMs + millisecondsToAdd + 100;
-    }
+    };
 
-    // Calculate the new date and time
-    let countDownDate = addTime(hoursToAdd, minutesToAdd, secondsToAdd);
+    const countDownDate = addTime(hoursToAdd, minutesToAdd, secondsToAdd);
 
-    // start interval
-    timerInterval = setInterval(function () {
-      console.log(hoursToAdd, minutesToAdd, secondsToAdd);
-      if (!isPaused) {
-        // Get today's date and time
+    this.timerInterval = setInterval(() => {
+      if (!this.isPaused) {
         let now = new Date().getTime();
-
-        // Find the distance between now and the count down date
         let distance = countDownDate - now;
-        console.log(distance);
 
-        // Time calculations for days, hours, minutes and seconds
         let hours = Math.floor(
           (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         );
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // update dash
         if (distance > 0) {
-          hoursEntry = timerDash.querySelector("#hours-entry");
-          minutesEntry = timerDash.querySelector("#minutes-entry");
-          secondsEntry = timerDash.querySelector("#seconds-entry");
-
-          // replace inputs with spans
-          hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hours}</span>`;
-          minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minutes}</span>`;
-          secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
+          this.updateDash(hours, minutes, seconds);
         }
 
-        // If the count down is finished, write some text
         if (distance <= 0) {
-          clearInterval(timerInterval);
+          clearInterval(this.timerInterval);
+          this.isAlarm = true;
           playAlertSound();
           playFlashTitle();
-          isAlarm = true;
-          // alertUser();
         }
       }
     }, 1000);
   }
 
-  // start functionality
-  function startUpdateDash() {
-    // get values from timer dash inputs - set default value for each to 0
-    let hourVal = 0;
-    let minVal = 0;
-    let secVal = 0;
-    if (hoursEntry.value) {
-      hourVal = parseInt(hoursEntry.value);
-    }
-    if (minutesEntry.value) {
-      minVal = parseInt(minutesEntry.value);
-    }
-    if (secondsEntry.value) {
-      secVal = parseInt(secondsEntry.value);
-    }
-
-    // replace inputs with spans
-    hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hourVal}</span>`;
-    minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minVal}</span>`;
-    secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${secVal}</span>`;
-  }
-
-  // start button functionality
-  function start() {
-    if (!isPlay) {
-      // update dash
-      startUpdateDash();
-
-      // update isPlay flag
-      isPlay = true;
-    }
-
-    // start timer
-    startTimer();
-  }
-
-  function pause() {
-    // update isPaused flag
-    isPaused = true;
-
-    // remove start event listener
-    clearInterval(timerInterval);
-
-    // cancel alarm
-    if (isAlarm) {
-      stopAlertSound();
-      stopFlashTitle();
-      isAlarm = false;
-    }
-  }
-
-  function reset() {
-    // turn off all alarms
-    if (isAlarm) {
-      stopAlertSound();
-      stopFlashTitle();
-      isAlarm = false;
-    }
-
+  updateDash(hours, minutes, seconds) {
     // re-select inputs
-    hoursEntry = timerDash.querySelector("#hours-entry");
-    minutesEntry = timerDash.querySelector("#minutes-entry");
-    secondsEntry = timerDash.querySelector("#seconds-entry");
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
 
-    // reset html to input
-    hoursEntry.outerHTML =
+    this.hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hours}</span>`;
+    this.minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minutes}</span>`;
+    this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
+  }
+
+  startUpdateDash() {
+    let hourVal = this.hoursEntry.value ? parseInt(this.hoursEntry.value) : 0;
+    let minVal = this.minutesEntry.value
+      ? parseInt(this.minutesEntry.value)
+      : 0;
+    let secVal = this.secondsEntry.value
+      ? parseInt(this.secondsEntry.value)
+      : 0;
+
+    this.updateDash(hourVal, minVal, secVal);
+  }
+
+  start() {
+    if (!this.isPlay) {
+      this.startUpdateDash();
+      this.isPlay = true;
+    }
+    this.startTimer();
+  }
+
+  pause() {
+    this.isPaused = true;
+    clearInterval(this.timerInterval);
+    if (this.isAlarm) {
+      stopAlertSound();
+      stopFlashTitle();
+      this.isAlarm = false;
+    }
+  }
+
+  reset() {
+    if (this.isAlarm) {
+      stopAlertSound();
+      stopFlashTitle();
+      this.isAlarm = false;
+    }
+
+    this.hoursEntry.outerHTML =
       '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="hours-entry" min="0" value="0" />';
-    minutesEntry.outerHTML =
+    this.minutesEntry.outerHTML =
       '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="minutes-entry" min="0" value="0" />';
-    secondsEntry.outerHTML =
+    this.secondsEntry.outerHTML =
       '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="seconds-entry" min="0" value="0" />';
   }
+}
 
-  // add listener to start button
-  startButton.addEventListener("click", start);
-
-  // add listener to pause button
-  pauseButton.addEventListener("click", pause);
-
-  // add listener for reset button
-  resetButton.addEventListener("click", reset);
-});
+const timerElement = document.getElementById("my-timer");
+const timer = new Timer(timerElement);
