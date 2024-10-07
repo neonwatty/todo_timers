@@ -5,7 +5,7 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
-class Timer {
+export class Timer {
   constructor(timerElement) {
     this.timerElement = timerElement;
     this.timerContainer = timerElement.querySelector("#timer-container");
@@ -95,6 +95,7 @@ class Timer {
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
     this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
 
+    // assign values
     this.hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hours}</span>`;
     this.minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minutes}</span>`;
     this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
@@ -137,6 +138,12 @@ class Timer {
       this.isAlarm = false;
     }
 
+    // re-select inputs
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+
+    // assign input
     this.hoursEntry.outerHTML =
       '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="hours-entry" min="0" value="0" />';
     this.minutesEntry.outerHTML =
@@ -145,6 +152,3 @@ class Timer {
       '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="seconds-entry" min="0" value="0" />';
   }
 }
-
-const timerElement = document.getElementById("my-timer");
-const timer = new Timer(timerElement);
