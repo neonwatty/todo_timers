@@ -1,51 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>todo timers</title>
-    <meta name="title" content="Todo timers" />
-    <meta
-      name="description"
-      content="A simple web app for setting todo timers."
-    />
-    <meta name="keywords" content="todo, timer, todos, checklist" />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
-  </head>
-  <body class="h-screen w-screen bg-slate-100 dark:bg-slate-800">
-    <div
-      id="container"
-      class="h-screen w-3/4 flex flex-col mx-auto my-10 border border-slate-800 dark:border-slate-200"
-    >
-      <div
-        class="flex flex-row w-full h-1/8 items-center justify-center space-x-5 mt-2"
-        id="add-delete-button-container"
-      >
-        <div
-          class="w-10 h-10 rounded-full text-3xl border border-slate-800 dark:border-slate-200 text-center text-slate-800 dark:text-slate-200 hover hover:bg-emerald-500 cursor-pointer active active:bg-teal-500"
-          id="add-timer-button"
-        >
-          +
-        </div>
-        <div
-          class="w-10 h-10 rounded-full text-3xl border border-slate-800 dark:border-slate-200 text-center text-slate-800 dark:text-slate-200 hover hover:text-slate-200 hover:bg-red-500 cursor-pointer active active:bg-red-600"
-          id="remove-timer-button"
-        >
-          -
-        </div>
-      </div>
-      <div
-        class="w-2/3 h-full mx-auto mt-2 flex flex-col items-center text-slate-800 dark:text-slate-300 border border-slate-800 dark:border-slate-200"
-        id="timers-outer-container"
-      >
-        <div
-          class="w-3/4 h-full mx-auto mt-2 flex flex-col items-center text-slate-800 dark:text-slate-300 border border-slate-800 dark:border-slate-200"
-          id="timers-inner-container"
-        >
-          <div
-            id="my-timer-1"
-            class="w-full h-1/3 flex flex-row border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
+const timerContainer = document.querySelector("#timers-inner-container");
+const addTimerButton = document.querySelector("#add-timer-button");
+const removeTimerButton = document.querySelector("#remove-timer-button");
+
+removeTimerButton.addEventListener("click", () => {
+  const focusedElement = document.activeElement;
+  console.log(focusedElement);
+});
+
+addTimerButton.addEventListener("click", () => {
+  const id = 1;
+  const timerDiv = `
+            <div
+            id=${id}
+            class="w-full h-1/3 mt-5 flex flex-row border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
             tabindex="0"
           >
             <div
@@ -133,14 +100,10 @@
                 class="h-full bg-slate-300 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-left"
               ></textarea>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <audio id="alertSound" src="audio/siren.mp3" preload="auto"></audio>
+          </div>`;
 
-    <script src="js/dash.js" type="module"></script>
-    <script src="js/add_remove_timer.js" type="module"></script>
-    <script src="js/focus.js" type="module"></script>
-  </body>
-</html>
+  // Insert the new div into the target div
+  timerContainer.insertAdjacentHTML("beforeend", timerDiv);
+
+  console.log("hi");
+});
