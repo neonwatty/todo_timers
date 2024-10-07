@@ -46,17 +46,32 @@
               class="w-2/3 h-full font-sans flex flex-col items-center justify-start text-md border border-slate-800 dark:border-slate-200"
             >
               <div
-                class="w-full h-2/3 flex flex-row space-x-7 items-center justify-center border border:border-slate-200"
+                class="w-full h-2/3 flex flex-row space-x-7 items-center justify-center pr-10 border border:border-slate-200"
                 id="timer-dash"
               >
-                <div class="flex flex-col text-right">
-                  <span class="text-4xl" id="hours-entry"></span>hours
+                <div class="flex flex-col text-right items-end">
+                  <input
+                    class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    type="number"
+                    id="hours-entry"
+                  />
+                  <div>hours</div>
                 </div>
-                <div class="flex flex-col text-right">
-                  <span class="text-4xl" id="minutes-entry"></span>minutes
+                <div class="flex flex-col text-right items-end">
+                  <input
+                    class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    type="number"
+                    id="minutes-entry"
+                  />
+                  <div>minutes</div>
                 </div>
-                <div class="flex flex-col text-right">
-                  <span class="text-4xl" id="seconds-entry"></span>seconds
+                <div class="flex flex-col text-right items-end">
+                  <input
+                    class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    type="number"
+                    id="seconds-entry"
+                  />
+                  <div>seconds</div>
                 </div>
               </div>
               <div
@@ -84,7 +99,7 @@
               </div>
             </div>
             <div
-              class="flex flex-col w-1/3 h-full border border-slate-800 dark:border-slate-200"
+              class="flex flex-col p-3 w-1/3 h-full border border-slate-800 dark:border-slate-200"
               id="meta-data"
             >
               <label for="name">Name:</label>
