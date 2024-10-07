@@ -13,75 +13,77 @@ let secondsEntry = timerDash.querySelector("#seconds-entry");
 const startButton = timerButtons.querySelector("#start-button");
 const pauseButton = timerButtons.querySelector("#pause-button");
 const resetButton = timerButtons.querySelector("#reset-button");
+let timerInterval;
+let isPlay = false;
+let isPaused = false;
 
 window.addEventListener("load", () => {
   // Update the count down every 1 second
   function startTimer() {
+    // unpause if paused
+    if (isPaused) {
+      isPaused = false;
+    }
+
+    // re-select inputs
     hoursEntry = timerDash.querySelector("#hours-entry");
     minutesEntry = timerDash.querySelector("#minutes-entry");
     secondsEntry = timerDash.querySelector("#seconds-entry");
-
-    console.log(hoursEntry, minutesEntry, secondsEntry);
 
     // grab data from dash
     let hoursToAdd = parseInt(hoursEntry.innerHTML);
     let minutesToAdd = parseInt(minutesEntry.innerHTML);
     let secondsToAdd = parseInt(secondsEntry.innerHTML);
 
-    // Get the current date and time in milliseconds
-    let currentDate = new Date();
-    let currentTimeInMs = currentDate.getTime();
-
     // Function to add time in hours, minutes, and seconds
-    function addTime(currentTime, hours, minutes, seconds) {
+    function addTime(hours, minutes, seconds) {
+      // Get the current date and time in milliseconds
+      let currentDate = new Date();
+      let currentTimeInMs = currentDate.getTime();
+
+      // compute time diff in miliseconds
       const millisecondsToAdd = (hours * 3600 + minutes * 60 + seconds) * 1000;
-      return currentTime + millisecondsToAdd + 100;
+      return currentTimeInMs + millisecondsToAdd + 100;
     }
 
     // Calculate the new date and time
-    let countDownDate = addTime(
-      currentTimeInMs,
-      hoursToAdd,
-      minutesToAdd,
-      secondsToAdd
-    );
-
-    console.log(currentTimeInMs, countDownDate);
-    console.log(hoursToAdd, minutesToAdd, secondsToAdd);
+    let countDownDate = addTime(hoursToAdd, minutesToAdd, secondsToAdd);
 
     // start interval
-    let stopCounter = 0;
-    let x = setInterval(function () {
-      // Get today's date and time
-      let now = new Date().getTime();
+    timerInterval = setInterval(function () {
+      console.log(hoursToAdd, minutesToAdd, secondsToAdd);
+      if (!isPaused) {
+        // Get today's date and time
+        let now = new Date().getTime();
 
-      // Find the distance between now and the count down date
-      let distance = countDownDate - now;
-      console.log(distance);
+        // Find the distance between now and the count down date
+        let distance = countDownDate - now;
+        console.log(distance);
 
-      // Time calculations for days, hours, minutes and seconds
-      let hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Time calculations for days, hours, minutes and seconds
+        let hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // update dash
-      if (distance > 0) {
-        hoursEntry = timerDash.querySelector("#hours-entry");
-        minutesEntry = timerDash.querySelector("#minutes-entry");
-        secondsEntry = timerDash.querySelector("#seconds-entry");
+        // update dash
+        if (distance > 0) {
+          hoursEntry = timerDash.querySelector("#hours-entry");
+          minutesEntry = timerDash.querySelector("#minutes-entry");
+          secondsEntry = timerDash.querySelector("#seconds-entry");
 
-        // replace inputs with spans
-        hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hours}</span>`;
-        minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minutes}</span>`;
-        secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
-      }
+          // replace inputs with spans
+          hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hours}</span>`;
+          minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minutes}</span>`;
+          secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
+        }
 
-      // If the count down is finished, write some text
-      if (distance <= 0) {
-        clearInterval(x);
-        // document.getElementById("demo").innerHTML = "EXPIRED";
+        // If the count down is finished, write some text
+        if (distance <= 0) {
+          clearInterval(timerInterval);
+          // document.getElementById("demo").innerHTML = "EXPIRED";
+        }
       }
     }, 1000);
   }
@@ -110,13 +112,31 @@ window.addEventListener("load", () => {
 
   // start button functionality
   function start() {
-    // update dash
-    startUpdateDash();
+    if (!isPlay) {
+      // update dash
+      startUpdateDash();
+
+      // update isPlay flag
+      isPlay = true;
+    }
 
     // start timer
     startTimer();
   }
 
+  function pause() {
+    // update isPaused flag
+    isPaused = true;
+
+    // remove start event listener
+    clearInterval(timerInterval);
+
+    // startButton.removeEventListener("click", start);
+  }
+
   // add listener to start button
   startButton.addEventListener("click", start);
+
+  // add listener to pause button
+  pauseButton.addEventListener("click", pause);
 });
