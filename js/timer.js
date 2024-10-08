@@ -16,6 +16,10 @@ export class TimerFunc {
     this.timerDash = this.timerElement.querySelector("#timer-dash");
     this.timerButtons = this.timerElement.querySelector("#timer-buttons");
 
+    this.hoursToAdd = 0;
+    this.minutesToAdd = 0;
+    this.secondsToAdd = 0;
+
     this.hoursEntry = this.timerDash.querySelector("#hours-entry");
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
     this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
@@ -42,7 +46,14 @@ export class TimerFunc {
     this.resetButton.addEventListener("click", () => this.reset());
   }
 
-  getStaticValues() {
+  updateInternalTimeValues(hours, minutes, seconds) {
+    // update this hours, minutes, seconds
+    this.hoursToAdd = parseInt(hours);
+    this.minutesToAdd = parseInt(minutes);
+    this.secondsToAdd = parseInt(seconds);
+  }
+
+  recordStaticDashValues() {
     // re-select inputs
     this.hoursEntry = this.timerDash.querySelector("#hours-entry");
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
@@ -53,10 +64,10 @@ export class TimerFunc {
     let minutesToAdd = parseInt(this.minutesEntry.textContent);
     let secondsToAdd = parseInt(this.secondsEntry.textContent);
 
-    return [hoursToAdd, minutesToAdd, secondsToAdd];
+    this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd);
   }
 
-  getDynamicValues() {
+  recordDynamicDashValues() {
     // re-select inputs
     this.hoursEntry = this.timerDash.querySelector("#hours-entry");
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
@@ -67,16 +78,57 @@ export class TimerFunc {
     let minutesToAdd = parseInt(this.minutesEntry.value);
     let secondsToAdd = parseInt(this.secondsEntry.value);
 
-    return [hoursToAdd, minutesToAdd, secondsToAdd];
+    this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd);
+  }
+
+  setStaticDash() {
+    // re-select inputs
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+
+    // assign values
+    this.hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${this.hoursToAdd}</span>`;
+    this.minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${this.minutesToAdd}</span>`;
+    this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${this.secondsToAdd}</span>`;
+  }
+
+  setDynamicDash() {
+    // re-select inputs
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+
+    // assign values
+    this.hoursEntry.outerHTML = `<input
+                                  class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                  type="number"
+                                  id="hours-entry"
+                                  min="0"
+                                  value="${this.hoursToAdd}"
+                                  />`;
+
+    this.minutesEntry.outerHTML = `<input
+                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                    type="number"
+                                    id="minutes-entry"
+                                    min="0"
+                                    value="${this.minutesToAdd}"
+                                  />`;
+
+    this.secondsEntry.outerHTML = `<input
+                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                    type="number"
+                                    id="seconds-entry"
+                                    min="0"
+                                    value="${this.secondsToAdd}"
+                                  />`;
   }
 
   startTimer() {
     if (this.isPaused) {
       this.isPaused = false;
     }
-
-    // get hoursToAdd, minutesToAdd, and secondsToAdd
-    let [hoursToAdd, minutesToAdd, secondsToAdd] = this.getStaticValues();
 
     // function to create correct timer countdown
     const addTime = (hours, minutes, seconds) => {
@@ -87,7 +139,11 @@ export class TimerFunc {
     };
 
     // map countdown
-    const countDownDate = addTime(hoursToAdd, minutesToAdd, secondsToAdd);
+    const countDownDate = addTime(
+      this.hoursToAdd,
+      this.minutesToAdd,
+      this.secondsToAdd
+    );
 
     // create interal timer
     this.timerInterval = setInterval(() => {
@@ -102,7 +158,11 @@ export class TimerFunc {
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         if (distance > 0) {
-          this.updateStaticDash(hours, minutes, seconds);
+          // update internal time values
+          this.updateInternalTimeValues(hours, minutes, seconds);
+
+          // use these new values to update static dash
+          this.setStaticDash();
         }
 
         if (distance <= 0) {
@@ -115,56 +175,11 @@ export class TimerFunc {
     }, 1000);
   }
 
-  updateStaticDash(hours, minutes, seconds) {
-    // re-select inputs
-    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
-    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
-    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
-
-    // assign values
-    this.hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${hours}</span>`;
-    this.minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${minutes}</span>`;
-    this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
-  }
-
-  updateDynamicDash(hours, minutes, seconds) {
-    // re-select inputs
-    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
-    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
-    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
-
-    // assign values
-    this.hoursEntry.outerHTML = `<input
-                                  class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
-                                  type="number"
-                                  id="hours-entry"
-                                  min="${hours}"
-                                  value="0"
-                                  />`;
-
-    this.minutesEntry.outerHTML = `<input
-                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
-                                    type="number"
-                                    id="minutes-entry"
-                                    min="${minutes}"
-                                    value="0"
-                                  />`;
-
-    this.secondsEntry.outerHTML = `<input
-                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
-                                    type="number"
-                                    id="seconds-entry"
-                                    min="${seconds}"
-                                    value="0"
-                                  />`;
-  }
-
   start() {
     if (!this.isPlay) {
-      // swap dynamic with static values
-      let [hours, minutes, seconds] = this.getDynamicValues();
-      console.log(hours, minutes, seconds);
-      this.updateStaticDash(hours, minutes, seconds);
+      // swap dynamic with static values //
+      // update internal time values based on current dynamic dash
+      this.recordDynamicDashValues();
 
       // start timer
       this.startTimer();
@@ -180,9 +195,12 @@ export class TimerFunc {
       // clear countdown interval
       clearInterval(this.timerInterval);
 
-      // swap static with dynamic values
-      let [hours, minutes, seconds] = this.getStaticValues();
-      this.updateDynamicDash(hours, minutes, seconds);
+      // swap static with dynamic dashes //
+      // record current time values from static dash
+      this.recordStaticDashValues();
+
+      // swap out static for dynamic dash with these recorded values
+      this.setDynamicDash();
 
       // halt alarm if playing
       if (this.isAlarm) {
