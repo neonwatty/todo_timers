@@ -42,11 +42,7 @@ export class TimerFunc {
     this.resetButton.addEventListener("click", () => this.reset());
   }
 
-  startTimer() {
-    if (this.isPaused) {
-      this.isPaused = false;
-    }
-
+  getDynamicValues() {
     // re-select inputs
     this.hoursEntry = this.timerDash.querySelector("#hours-entry");
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
@@ -56,6 +52,16 @@ export class TimerFunc {
     let hoursToAdd = parseInt(this.hoursEntry.innerHTML);
     let minutesToAdd = parseInt(this.minutesEntry.innerHTML);
     let secondsToAdd = parseInt(this.secondsEntry.innerHTML);
+    return [hoursToAdd, minutesToAdd, secondsToAdd];
+  }
+
+  startTimer() {
+    if (this.isPaused) {
+      this.isPaused = false;
+    }
+
+    // get hoursToAdd, minutesToAdd, and secondsToAdd
+    [hoursToAdd, minutesToAdd, secondsToAdd] = getDynamicValues();
 
     // function to create correct timer countdown
     const addTime = (hours, minutes, seconds) => {
@@ -81,7 +87,7 @@ export class TimerFunc {
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         if (distance > 0) {
-          this.updateDash(hours, minutes, seconds);
+          this.updateStaticDash(hours, minutes, seconds);
         }
 
         if (distance <= 0) {
@@ -94,7 +100,7 @@ export class TimerFunc {
     }, 1000);
   }
 
-  updateDash(hours, minutes, seconds) {
+  updateStaticDash(hours, minutes, seconds) {
     // re-select inputs
     this.hoursEntry = this.timerDash.querySelector("#hours-entry");
     this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
@@ -106,6 +112,38 @@ export class TimerFunc {
     this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${seconds}</span>`;
   }
 
+  updateDynamicDash(hours, minutes, seconds) {
+    // re-select inputs
+    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
+    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+
+    // assign values
+    this.hoursEntry.outerHTML = `<input
+                                  class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                  type="number"
+                                  id="hours-entry"
+                                  min="${hours}"
+                                  value="0"
+                                  />`;
+
+    this.minutesEntry.outerHTML = `<input
+                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                    type="number"
+                                    id="minutes-entry"
+                                    min="${minutes}"
+                                    value="0"
+                                  />`;
+
+    this.secondsEntry.outerHTML = `<input
+                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                    type="number"
+                                    id="seconds-entry"
+                                    min="${seconds}"
+                                    value="0"
+                                  />`;
+  }
+
   startUpdateDash() {
     let hourVal = this.hoursEntry.value ? parseInt(this.hoursEntry.value) : 0;
     let minVal = this.minutesEntry.value
@@ -115,31 +153,39 @@ export class TimerFunc {
       ? parseInt(this.secondsEntry.value)
       : 0;
 
-    this.updateDash(hourVal, minVal, secVal);
+    this.updateStaticDash(hourVal, minVal, secVal);
   }
 
   start() {
     if (!this.isPlay) {
       this.startUpdateDash();
+      this.startTimer();
       this.isPlay = true;
     }
-    this.startTimer();
   }
 
   pause() {
-    // update pause flag
-    this.isPaused = true;
+    if (!this.isPaused) {
+      this.hoursEntry = this.timerDash.querySelector("#hours-entry");
+      console.log(this.hoursEntry);
 
-    // clear countdown interval
-    clearInterval(this.timerInterval);
-    if (this.isAlarm) {
-      stopAlertSound();
-      stopFlashTitle();
-      this.isAlarm = false;
+      // clear countdown interval
+      clearInterval(this.timerInterval);
+
+      // halt alarm if playing
+      if (this.isAlarm) {
+        stopAlertSound();
+        stopFlashTitle();
+        this.isAlarm = false;
+      }
+
+      // swap static for dynamic dash
+      this.updateDynamicDash();
+
+      // update pause and play flags
+      this.isPaused = true;
+      this.isPlay = false;
     }
-
-    // update play flag
-    this.isPlay = false;
   }
 
   reset() {
