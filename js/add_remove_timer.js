@@ -29,6 +29,7 @@ function createNewTimerDiv(id) {
             id=${id}
             class="w-full h-2/3 md:h-1/3 mt-5 flex flex-row rounded-3xl border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
             tabindex="0"
+            draggable="true"
           >
             <div
               id="timer-container"
