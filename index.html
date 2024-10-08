@@ -4,19 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .timer-container {
+        transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+      }
+      .blur {
+        filter: blur(4px);
+      }
+    </style>
     <title>todo timers</title>
     <meta name="title" content="Todo timers" />
     <meta
       name="description"
       content="A simple web app for setting todo timers."
     />
-    <meta name="keywords" content="todo, timer, todos, checklist" />
-    <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
+    <meta name="keywords" content="todo, stopwatch, timer, todos, checklist" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://www.svgrepo.com/show/2045/stopwatch.svg"
+    />
   </head>
   <body class="h-screen w-screen bg-slate-100 dark:bg-slate-800">
     <div
-      id="container"
-      class="min-h-screen w-3/4 flex flex-col mx-auto my-10 rounded-3xl border border-dotted border-slate-800 dark:border-slate-200"
+      class="container min-h-screen w-3/4 flex flex-col mx-auto my-10 rounded-3xl border border-dotted border-slate-800 dark:border-slate-200"
     >
       <div
         class="flex flex-row w-full h-1/8 items-center justify-center space-x-5 mt-2"

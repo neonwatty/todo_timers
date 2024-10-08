@@ -1,3 +1,4 @@
+import { resetTimerBlurEvents } from "./blur.js";
 import { updateFocus } from "./focus.js";
 import { TimerFunc } from "./timer.js";
 
@@ -20,6 +21,9 @@ export function createNewTimer(id) {
 
     // create new timer functionality
     let newTimerFunc = new TimerFunc(timerName);
+
+    // reset blur events for timers
+    resetTimerBlurEvents();
   }
 }
 
@@ -27,12 +31,11 @@ function createNewTimerDiv(id) {
   const timerDiv = `
             <div
             id=${id}
-            class="w-full h-2/3 md:h-1/3 mt-5 flex flex-row rounded-3xl border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
+            class="timer-container w-full h-2/3 md:h-1/3 mt-5 flex flex-row rounded-3xl border border-slate-800 dark:border-slate-200 focus:bg-slate-500 focus:outline-none"
             tabindex="0"
             draggable="true"
           >
             <div
-              id="timer-container"
               class="w-2/3 h-full font-sans flex flex-col items-center justify-start text-md"
             >
               <div
@@ -127,6 +130,9 @@ removeTimerButton.addEventListener("click", () => {
   const removeElement = document.getElementById(focusId);
   if (removeElement) {
     removeElement.remove();
+
+    // reset timer blur events
+    resetTimerBlurEvents();
   }
 });
 
