@@ -10,33 +10,28 @@ import { deleteDict, loadDict, saveDict } from "./localStorage.js";
 const timerContainer = document.querySelector("#timers-inner-container");
 
 export class TimerFunc {
-  constructor(timerName) {
-    this.timerName = timerName;
-    this.timerElement = timerContainer.querySelector(`#${timerName}`);
+  constructor(timerPrivateName) {
+    this.timerPrivateName = timerPrivateName;
+
+    this.timerElement = timerContainer.querySelector(`#${timerPrivateName}`);
     this.timerDash = this.timerElement.querySelector("#timer-dash");
     this.timerButtons = this.timerElement.querySelector("#timer-buttons");
-
-    this.hoursToAdd = 0;
-    this.minutesToAdd = 0;
-    this.secondsToAdd = 0;
-
-    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
-    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
-    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
-
-    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
-    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
-    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+    this.timerMetaData = this.timerElement.querySelector("#timer-metadata");
 
     this.startButton = this.timerButtons.querySelector("#start-button");
     this.pauseButton = this.timerButtons.querySelector("#pause-button");
     this.resetButton = this.timerButtons.querySelector("#reset-button");
+    this.saveButton = this.timerMetaData.querySelector("#save-button");
 
     this.timerInterval = null;
     this.isPlay = false;
     this.isPaused = false;
     this.isAlarm = false;
 
+    // TODO: load internal timer values, name, and notes from local storage
+    this.updateInternalTimeValues(0, 0, 0); // timer init time values
+
+    // add event listeners to buttons
     this.initialize();
   }
 
@@ -44,6 +39,7 @@ export class TimerFunc {
     this.startButton.addEventListener("click", () => this.start());
     this.pauseButton.addEventListener("click", () => this.pause());
     this.resetButton.addEventListener("click", () => this.reset());
+    this.saveButton.addEventListener("click", () => this.save());
   }
 
   updateInternalTimeValues(hours, minutes, seconds) {
@@ -252,5 +248,31 @@ export class TimerFunc {
 
     // assign input
     this.setDynamicDash();
+  }
+
+  save() {
+    if (!this.isPaused) {
+      // update timer dash data
+      this.recordDynamicDashValues();
+
+      // update name and notes metadata provided input
+      this.timerName = this.timerMetaData.querySelector("#timer-name").value;
+      this.timerNotes = this.timerMetaData.querySelector("#timer-notes").value;
+
+      // create dictionary of values to save under timerPrivateName
+      let timerSaveData = {
+        timerName: this.timerName,
+        timerNotes: this.timerNotes,
+        hoursToAdd: this.hoursToAdd,
+        minutesToAdd: this.minutesToAdd,
+        secondsToAdd: this.secondsToAdd,
+      };
+
+      // get timerPrivateName
+      saveDict(this.timerPrivateName, timerSaveData);
+
+      // for testing - load just saved data
+      console.log(loadDict(this.timerPrivateName));
+    }
   }
 }

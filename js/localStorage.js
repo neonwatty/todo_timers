@@ -1,5 +1,4 @@
 export function saveDict(key, dict) {
-  localStorage.setItem(key, value);
   localStorage.setItem(key, JSON.stringify(dict));
 }
 
