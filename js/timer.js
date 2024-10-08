@@ -247,10 +247,8 @@ export class TimerFunc {
     // turn off red timer bg
     this.timerElement.classList.remove("bg-red-400");
 
-    // re-select inputs
-    this.hoursEntry = 0;
-    this.minutesEntry = 0;
-    this.secondsEntry = 0;
+    // reset timer values to 0
+    this.updateInternalTimeValues(0, 0, 0);
 
     // assign input
     this.setDynamicDash();
