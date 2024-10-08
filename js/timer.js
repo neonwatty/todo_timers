@@ -60,9 +60,20 @@ export class TimerFunc {
     this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
 
     // get timer values
-    let hoursToAdd = parseInt(this.hoursEntry.textContent);
-    let minutesToAdd = parseInt(this.minutesEntry.textContent);
-    let secondsToAdd = parseInt(this.secondsEntry.textContent);
+    let hoursToAdd =
+      this.hoursEntry.textContent === ""
+        ? 0
+        : Math.max(parseInt(this.hoursEntry.textContent), 0);
+
+    let minutesToAdd =
+      this.minutesEntry.textContent === ""
+        ? 0
+        : Math.max(parseInt(this.minutesEntry.textContent), 0);
+
+    let secondsToAdd =
+      this.secondsEntry.textContent === ""
+        ? 0
+        : Math.max(parseInt(this.secondsEntry.textContent), 0);
 
     this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd);
   }
@@ -74,9 +85,20 @@ export class TimerFunc {
     this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
 
     // get timer values
-    let hoursToAdd = parseInt(this.hoursEntry.value);
-    let minutesToAdd = parseInt(this.minutesEntry.value);
-    let secondsToAdd = parseInt(this.secondsEntry.value);
+    let hoursToAdd =
+      this.hoursEntry.value === ""
+        ? 0
+        : Math.max(parseInt(this.hoursEntry.value), 0);
+
+    let minutesToAdd =
+      this.minutesEntry.value === ""
+        ? 0
+        : Math.max(parseInt(this.minutesEntry.value), 0);
+
+    let secondsToAdd =
+      this.secondsEntry.value === ""
+        ? 0
+        : Math.max(parseInt(this.secondsEntry.value), 0);
 
     this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd);
   }
