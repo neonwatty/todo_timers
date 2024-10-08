@@ -192,6 +192,7 @@ export class TimerFunc {
           this.isAlarm = true;
           playAlertSound();
           playFlashTitle();
+          this.timerElement.classList.add("bg-red-400");
         }
       }
     }, 1000);
@@ -243,18 +244,15 @@ export class TimerFunc {
       stopFlashTitle();
       this.isAlarm = false;
     }
+    // turn off red timer bg
+    this.timerElement.classList.remove("bg-red-400");
 
     // re-select inputs
-    this.hoursEntry = this.timerDash.querySelector("#hours-entry");
-    this.minutesEntry = this.timerDash.querySelector("#minutes-entry");
-    this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
+    this.hoursEntry = 0;
+    this.minutesEntry = 0;
+    this.secondsEntry = 0;
 
     // assign input
-    this.hoursEntry.outerHTML =
-      '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="hours-entry" min="0" value="0" />';
-    this.minutesEntry.outerHTML =
-      '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="minutes-entry" min="0" value="0" />';
-    this.secondsEntry.outerHTML =
-      '<input class="text-3xl w-2/3 h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700" type="number" id="seconds-entry" min="0" value="0" />';
+    this.setDynamicDash();
   }
 }
