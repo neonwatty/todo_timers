@@ -1,5 +1,6 @@
 import { createNewTimer } from "./add_remove_timer.js";
 import { resetTimerBlurEvents } from "./blur.js";
+import { resetTimerDrag } from "./drag.js";
 import { loadDict } from "./localStorage.js";
 let firstTimeId = 1;
 
@@ -28,7 +29,9 @@ window.addEventListener("load", () => {
     createNewTimer(timerPrivateName);
   }
 
+  // reset blur and drag events
   resetTimerBlurEvents();
+  resetTimerDrag();
 });
 
 export { firstTimeId };

@@ -11,3 +11,13 @@
   transition: opacity 0.6s ease;
   opacity: 0;
 }
+
+.timer-container.hover {
+  background-color: #b282f5;
+  border-color: #27ae60;
+  border: 3px dashed #bdc3c7;
+}
+
+.dragging {
+  background-color: #2980b9; /* Change background color when dragging */
+}

@@ -5,7 +5,7 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
-import { saveDict } from "./localStorage.js";
+import { loadTimer, saveTimer } from "./localStorage.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 
@@ -35,12 +35,7 @@ export class TimerFunc {
     this.isAlarm = false;
 
     // load internal timer values, name, and notes from local storage
-    if (timerName !== "") {
-      this.timerMetaData.querySelector("#timer-name").value = timerName;
-    }
-    if (timerNotes !== "") {
-      this.timerMetaData.querySelector("#timer-notes").value = timerNotes;
-    }
+    this.updateTimerMetadata(timerName, timerNotes);
     this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd); // timer init time values
     this.setDynamicDash();
 
@@ -53,6 +48,11 @@ export class TimerFunc {
     this.pauseButton.addEventListener("click", () => this.pause());
     this.resetButton.addEventListener("click", () => this.reset());
     this.saveButton.addEventListener("click", () => this.save());
+  }
+
+  updateTimerMetadata(timerName, timerNotes) {
+    this.timerMetaData.querySelector("#timer-name").value = timerName;
+    this.timerMetaData.querySelector("#timer-notes").value = timerNotes;
   }
 
   updateInternalTimeValues(hours, minutes, seconds) {
@@ -302,7 +302,20 @@ export class TimerFunc {
       };
 
       // get timerPrivateName
-      saveDict(this.timerPrivateName, timerSaveData);
+      saveTimer(this.timerPrivateName, timerSaveData);
     }
+  }
+
+  reload() {
+    // re-load data from local storage using private name
+    let timerData = loadTimer(this.timerPrivateName);
+
+    // re-assign all data to timer entries
+    this.updateTimerMetadata(timerData.timerName, timerData.timerNotes);
+    this.updateInternalTimeValues(
+      timerData.hoursToAdd,
+      timerData.minutesToAdd,
+      timerData.secondsToAdd
+    );
   }
 }
