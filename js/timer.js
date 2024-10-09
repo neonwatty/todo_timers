@@ -222,9 +222,17 @@ export class TimerFunc {
         if (distance <= 0) {
           clearInterval(this.timerInterval);
           this.isAlarm = true;
+
+          // play alarms
           playAlertSound();
           playFlashTitle();
+
+          // set background of timer to red
           this.timerElement.classList.add("bg-red-400");
+
+          // re-state static values
+          this.updateInternalTimeValues(0, 0, 0);
+          this.setStaticDash();
         }
       }
     }, 1000);
