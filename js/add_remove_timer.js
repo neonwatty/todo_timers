@@ -1,16 +1,15 @@
 import { resetTimerBlurEvents } from "./blur.js";
 import { updateFocus } from "./focus.js";
+import { firstTimeId } from "./initialize.js";
+import { deleteDict } from "./localStorage.js";
 import { TimerFunc } from "./timer.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 const addTimerButton = document.querySelector("#add-timer-button");
 const removeTimerButton = document.querySelector("#remove-timer-button");
 
-let idCounter = 2;
-
-export function createNewTimer(id) {
+export function createNewTimer(timerName) {
   // create id namespace
-  const timerName = `my-timer-${id}`;
   const timerContainer = document.querySelector("#timers-inner-container");
   const timerElement = timerContainer.querySelector(`#${timerName}`);
 
@@ -136,6 +135,10 @@ removeTimerButton.addEventListener("click", () => {
   const focusId = updateFocus();
   const removeElement = document.getElementById(focusId);
   if (removeElement) {
+    // delete element data from local storage
+    deleteDict(focusId);
+
+    // delete element div
     removeElement.remove();
 
     // reset timer blur events
@@ -144,8 +147,11 @@ removeTimerButton.addEventListener("click", () => {
 });
 
 addTimerButton.addEventListener("click", () => {
+  let idCounter = firstTimeId + 1; // import this dynamically from initialize
+
   // create new timer div
-  createNewTimer(idCounter);
+  const timerName = `my-timer-${idCounter}`;
+  createNewTimer(timerName);
 
   // update counter
   idCounter++;

@@ -1,12 +1,24 @@
+const masterKey = "todo-timers-app";
+
 export function saveDict(key, dict) {
-  localStorage.setItem(key, JSON.stringify(dict));
+  let currentData = loadDict();
+  console.log(currentData);
+  currentData[key] = dict;
+  localStorage.setItem(masterKey, JSON.stringify(currentData));
 }
 
-export function loadDict(key) {
-  const retrievedDict = JSON.parse(localStorage.getItem(key));
+export function loadDict() {
+  let retrievedDict =
+    JSON.parse(localStorage.getItem(masterKey)) === null
+      ? {}
+      : JSON.parse(localStorage.getItem(masterKey));
+
+  console.log(retrievedDict);
   return retrievedDict;
 }
 
 export function deleteDict(key) {
-  localStorage.removeItem(key);
+  let currentData = loadDict();
+  delete currentData[key];
+  localStorage.setItem(masterKey, JSON.stringify(currentData));
 }

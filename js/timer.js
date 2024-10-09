@@ -272,7 +272,7 @@ export class TimerFunc {
       saveDict(this.timerPrivateName, timerSaveData);
 
       // for testing - load just saved data
-      console.log(loadDict(this.timerPrivateName));
+      console.log(loadDict());
     }
   }
 }
