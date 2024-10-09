@@ -295,9 +295,6 @@ export class TimerFunc {
   }
 
   save() {
-    console.log(`isPlay -> ${this.isPlay}`);
-    console.log(`isPause -> ${this.isPaused}`);
-
     if (this.isPaused || !this.isPlay) {
       // save values from dynamic dash
       this.recordDynamicDashValues();
