@@ -1,0 +1,13 @@
+.timer-container {
+  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+}
+.blur {
+  filter: blur(4px);
+}
+.drag-over {
+  border: 2px dashed #000;
+}
+.fade-out {
+  transition: opacity 0.6s ease;
+  opacity: 0;
+}

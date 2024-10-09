@@ -153,7 +153,10 @@ removeTimerButton.addEventListener("click", () => {
     deleteDict(focusId);
 
     // delete element div
-    removeElement.remove();
+    removeElement.classList.add("fade-out");
+    setTimeout(() => {
+      removeElement.remove();
+    }, 600);
 
     // reset timer blur events
     resetTimerBlurEvents();
