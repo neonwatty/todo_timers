@@ -122,6 +122,16 @@ export class TimerFunc {
     this.hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${this.hoursToAdd}</span>`;
     this.minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${this.minutesToAdd}</span>`;
     this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${this.secondsToAdd}</span>`;
+
+    // re-select labels
+    let hoursLabel = this.timerDash.querySelector("#hours-label");
+
+    // assign labels
+    if (this.hoursToAdd > 1) {
+      hoursLabel.innerHTML = `hours`;
+    } else {
+      hoursLabel.innerHTML = `hour`;
+    }
   }
 
   setDynamicDash() {
@@ -154,6 +164,16 @@ export class TimerFunc {
                                     min="0"
                                     value="${this.secondsToAdd}"
                                   />`;
+
+    // re-select labels
+    let hoursLabel = this.timerDash.querySelector("#hours-label");
+
+    // assign labels
+    if (this.hoursToAdd > 1) {
+      hoursLabel.innerHTML = `hours`;
+    } else {
+      hoursLabel.innerHTML = `hour`;
+    }
   }
 
   startTimer() {

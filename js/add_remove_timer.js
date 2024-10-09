@@ -62,7 +62,7 @@ function createNewTimerDiv(id) {
                     min="0"
                     value="0"
                   />
-                  <div>hours</div>
+                  <div id="hours-label">hours</div>
                 </div>
                 <div class="flex flex-col text-right items-center md:items-end">
                   <input
@@ -72,7 +72,7 @@ function createNewTimerDiv(id) {
                     min="0"
                     value="0"
                   />
-                  <div>minutes</div>
+                  <div id="minutes-label">minutes</div>
                 </div>
                 <div class="flex flex-col text-right items-center md:items-end">
                   <input
@@ -82,7 +82,7 @@ function createNewTimerDiv(id) {
                     min="0"
                     value="0"
                   />
-                  <div>seconds</div>
+                  <div id="seconds-label">seconds</div>
                 </div>
               </div>
               <div
