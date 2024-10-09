@@ -214,6 +214,9 @@ export class TimerFunc {
 
           // use these new values to update static dash
           this.setStaticDash();
+
+          // save values
+          this.save();
         }
 
         if (distance <= 0) {
@@ -285,9 +288,6 @@ export class TimerFunc {
 
   save() {
     if (!this.isPaused) {
-      // update timer dash data
-      this.recordDynamicDashValues();
-
       // update name and notes metadata provided input
       this.timerName = this.timerMetaData.querySelector("#timer-name").value;
       this.timerNotes = this.timerMetaData.querySelector("#timer-notes").value;
@@ -300,8 +300,6 @@ export class TimerFunc {
         minutesToAdd: this.minutesToAdd,
         secondsToAdd: this.secondsToAdd,
       };
-
-      console.log(timerSaveData);
 
       // get timerPrivateName
       saveDict(this.timerPrivateName, timerSaveData);
