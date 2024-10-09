@@ -8,18 +8,32 @@ const timerContainer = document.querySelector("#timers-inner-container");
 const addTimerButton = document.querySelector("#add-timer-button");
 const removeTimerButton = document.querySelector("#remove-timer-button");
 
-export function createNewTimer(timerName) {
+export function createNewTimer(
+  privateTimerName,
+  timerName = "",
+  timerNotes = "",
+  hoursToAdd = 0,
+  minutesToAdd = 0,
+  secondsToAdd = 0
+) {
   // create id namespace
   const timerContainer = document.querySelector("#timers-inner-container");
-  const timerElement = timerContainer.querySelector(`#${timerName}`);
+  const timerElement = timerContainer.querySelector(`#${privateTimerName}`);
 
   // if it doesn't exist create it - both the div and timer functionality
   if (!timerElement) {
     // create new div
-    createNewTimerDiv(timerName);
+    createNewTimerDiv(privateTimerName);
 
     // create new timer functionality
-    let newTimerFunc = new TimerFunc(timerName);
+    let newTimerFunc = new TimerFunc(
+      privateTimerName,
+      timerName,
+      timerNotes,
+      hoursToAdd,
+      minutesToAdd,
+      secondsToAdd
+    );
 
     // reset blur events for timers
     resetTimerBlurEvents();

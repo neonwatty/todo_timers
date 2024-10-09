@@ -2,7 +2,6 @@ const masterKey = "todo-timers-app";
 
 export function saveDict(key, dict) {
   let currentData = loadDict();
-  console.log(currentData);
   currentData[key] = dict;
   localStorage.setItem(masterKey, JSON.stringify(currentData));
 }
@@ -13,7 +12,6 @@ export function loadDict() {
       ? {}
       : JSON.parse(localStorage.getItem(masterKey));
 
-  console.log(retrievedDict);
   return retrievedDict;
 }
 

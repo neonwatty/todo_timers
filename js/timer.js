@@ -5,14 +5,20 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
-import { deleteDict, loadDict, saveDict } from "./localStorage.js";
+import { loadDict, saveDict } from "./localStorage.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 
 export class TimerFunc {
-  constructor(timerPrivateName) {
+  constructor(
+    timerPrivateName,
+    timerName = "",
+    timerNotes = "",
+    hoursToAdd = 0,
+    minutesToAdd = 0,
+    secondsToAdd = 0
+  ) {
     this.timerPrivateName = timerPrivateName;
-
     this.timerElement = timerContainer.querySelector(`#${timerPrivateName}`);
     this.timerDash = this.timerElement.querySelector("#timer-dash");
     this.timerButtons = this.timerElement.querySelector("#timer-buttons");
@@ -28,8 +34,14 @@ export class TimerFunc {
     this.isPaused = false;
     this.isAlarm = false;
 
-    // TODO: load internal timer values, name, and notes from local storage
-    this.updateInternalTimeValues(0, 0, 0); // timer init time values
+    // load internal timer values, name, and notes from local storage
+    if (timerName !== "") {
+      this.timerMetaData.querySelector("#timer-name").value = timerName;
+    }
+    if (timerNotes !== "") {
+      this.timerMetaData.querySelector("#timer-notes").value = timerNotes;
+    }
+    this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd); // timer init time values
 
     // add event listeners to buttons
     this.initialize();
