@@ -119,9 +119,9 @@ export class TimerFunc {
     this.secondsEntry = this.timerDash.querySelector("#seconds-entry");
 
     // assign values
-    this.hoursEntry.outerHTML = `<span class="text-4xl" id="hours-entry">${this.hoursToAdd}</span>`;
-    this.minutesEntry.outerHTML = `<span class="text-4xl" id="minutes-entry">${this.minutesToAdd}</span>`;
-    this.secondsEntry.outerHTML = `<span class="text-4xl" id="seconds-entry">${this.secondsToAdd}</span>`;
+    this.hoursEntry.outerHTML = `<span class="text-4xl border border-slate-800 dark:border-slate-200 p-2" id="hours-entry">${this.hoursToAdd}</span>`;
+    this.minutesEntry.outerHTML = `<span class="text-4xl border border-slate-800 dark:border-slate-200 p-2" id="minutes-entry">${this.minutesToAdd}</span>`;
+    this.secondsEntry.outerHTML = `<span class="text-4xl border border-slate-800 dark:border-slate-200 p-2" id="seconds-entry">${this.secondsToAdd}</span>`;
 
     // re-select labels
     let hoursLabel = this.timerDash.querySelector("#hours-label");
@@ -142,7 +142,7 @@ export class TimerFunc {
 
     // assign values
     this.hoursEntry.outerHTML = `<input
-                                  class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                  class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700 border border-slate-800 dark:border-slate-200"
                                   type="number"
                                   id="hours-entry"
                                   min="0"
@@ -150,7 +150,7 @@ export class TimerFunc {
                                   />`;
 
     this.minutesEntry.outerHTML = `<input
-                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700 border border-slate-800 dark:border-slate-200"
                                     type="number"
                                     id="minutes-entry"
                                     min="0"
@@ -158,7 +158,7 @@ export class TimerFunc {
                                   />`;
 
     this.secondsEntry.outerHTML = `<input
-                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700 border border-slate-800 dark:border-slate-200"
                                     type="number"
                                     id="seconds-entry"
                                     min="0"

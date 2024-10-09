@@ -54,12 +54,12 @@ function createNewTimerDiv(id) {
               class="w-2/3 h-full font-sans flex flex-col items-center justify-start text-md"
             >
               <div
-                class="w-full h-full pt-3 md:h-2/3 flex flex-col lg:flex-row lg:space-x-7 items-center justify-center pr-10 border border-t-0 border-l-0 border-r-0 border-b-1 border-slate-800 dark:border-slate-200"
+                class="w-full h-full pt-3 md:h-2/3 flex flex-col lg:flex-row lg:space-x-7 items-center justify-center pr-10 border border-t-0 border-l-0 border-r-0 lg:border-r-1 lg:border-r-0 border-b-1 border-slate-800 dark:border-slate-200"
                 id="timer-dash"
               >
                 <div class="flex flex-col text-right items-center md:items-end">
                   <input
-                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700 border border-slate-100 dark:border-slate-900"
                     type="number"
                     id="hours-entry"
                     min="0"
@@ -69,7 +69,7 @@ function createNewTimerDiv(id) {
                 </div>
                 <div class="flex flex-col text-right items-center md:items-end">
                   <input
-                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700 border border-slate-100 dark:border-slate-900"
                     type="number"
                     id="minutes-entry"
                     min="0"
@@ -79,7 +79,7 @@ function createNewTimerDiv(id) {
                 </div>
                 <div class="flex flex-col text-right items-center md:items-end">
                   <input
-                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700"
+                    class="text-3xl text-right w-1/3 h-2/3 md:w-4/5 md:h-1/4 text-slate-800 dark:text-slate-200 bg-slate-300 dark:bg-slate-700 border border-slate-800 dark:border-slate-200"
                     type="number"
                     id="seconds-entry"
                     min="0"
@@ -112,7 +112,7 @@ function createNewTimerDiv(id) {
                 </div>
               </div>
             </div>
-            <div id="timer-metadata" class="flex flex-row pb-3 pl-1 border border-l-1 border-t-0 border-r-0 border-b-0 w-1/3 h-1/2">
+            <div id="timer-metadata" class="flex flex-row pb-3 pl-1 border border-l-1 border-t-0 border-r-0 border-b-0 w-1/3 h-auto lg:h-1/2">
               <div
                 class="flex flex-col w-2/3 p-2"
               >
@@ -133,10 +133,9 @@ function createNewTimerDiv(id) {
                   rows=1
                   class="h-full bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-200 text-left"
                 ></textarea>
-  
               </div>
               <div
-                  class="w-1/3 h-1/2 my-auto mr-2 bg-green-500 flex items-center justify-center text-lg text-center rounded-2xl text-slate-800 dark:text-slate-200 border border-slate-800 dark:border-slate-200 hover hover:bg-green-700 cursor-pointer active active:bg-green-400"
+                  class="w-1/3 h-1/8 lg:h-1/2 my-auto mr-2 bg-green-500 flex items-center justify-center text-lg text-center rounded-2xl text-slate-800 dark:text-slate-200 border border-slate-800 dark:border-slate-200 hover hover:bg-green-700 cursor-pointer active active:bg-green-400"
                   id="save-button"
                 >
                   💾
