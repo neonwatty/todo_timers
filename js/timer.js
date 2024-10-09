@@ -5,7 +5,7 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 
-import { loadDict, saveDict } from "./localStorage.js";
+import { saveDict } from "./localStorage.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 
@@ -42,6 +42,7 @@ export class TimerFunc {
       this.timerMetaData.querySelector("#timer-notes").value = timerNotes;
     }
     this.updateInternalTimeValues(hoursToAdd, minutesToAdd, secondsToAdd); // timer init time values
+    this.setDynamicDash();
 
     // add event listeners to buttons
     this.initialize();
@@ -280,11 +281,10 @@ export class TimerFunc {
         secondsToAdd: this.secondsToAdd,
       };
 
+      console.log(timerSaveData);
+
       // get timerPrivateName
       saveDict(this.timerPrivateName, timerSaveData);
-
-      // for testing - load just saved data
-      console.log(loadDict());
     }
   }
 }
