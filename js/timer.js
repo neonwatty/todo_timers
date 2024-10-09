@@ -254,7 +254,7 @@ export class TimerFunc {
   }
 
   pause() {
-    if (!this.isPaused) {
+    if (!this.isPaused && this.isPlay) {
       // clear countdown interval
       clearInterval(this.timerInterval);
 
@@ -295,23 +295,29 @@ export class TimerFunc {
   }
 
   save() {
-    if (!this.isPaused) {
-      // update name and notes metadata provided input
-      this.timerName = this.timerMetaData.querySelector("#timer-name").value;
-      this.timerNotes = this.timerMetaData.querySelector("#timer-notes").value;
-
-      // create dictionary of values to save under timerPrivateName
-      let timerSaveData = {
-        timerName: this.timerName,
-        timerNotes: this.timerNotes,
-        hoursToAdd: this.hoursToAdd,
-        minutesToAdd: this.minutesToAdd,
-        secondsToAdd: this.secondsToAdd,
-      };
-
-      // get timerPrivateName
-      saveTimer(this.timerPrivateName, timerSaveData);
+    if (this.isPaused) {
+      // save values from dynamic dash
+      this.recordDynamicDashValues();
+    } else {
+      // save values from static dash
+      this.recordStaticDashValues();
     }
+
+    // update name and notes metadata provided input
+    this.timerName = this.timerMetaData.querySelector("#timer-name").value;
+    this.timerNotes = this.timerMetaData.querySelector("#timer-notes").value;
+
+    // create dictionary of values to save under timerPrivateName
+    let timerSaveData = {
+      timerName: this.timerName,
+      timerNotes: this.timerNotes,
+      hoursToAdd: this.hoursToAdd,
+      minutesToAdd: this.minutesToAdd,
+      secondsToAdd: this.secondsToAdd,
+    };
+
+    // get timerPrivateName
+    saveTimer(this.timerPrivateName, timerSaveData);
   }
 
   reload() {
