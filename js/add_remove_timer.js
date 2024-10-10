@@ -147,7 +147,7 @@ function createNewTimerDiv(id) {
   timerContainer.insertAdjacentHTML("beforeend", timerDiv);
 }
 
-removeTimerButton.addEventListener("click", () => {
+function remove() {
   const focusId = updateFocus();
   const removeElement = document.getElementById(focusId);
   if (removeElement) {
@@ -164,9 +164,11 @@ removeTimerButton.addEventListener("click", () => {
     resetTimerBlurEvents();
     resetTimerDrag();
   }
-});
+}
 
-addTimerButton.addEventListener("click", () => {
+removeTimerButton.addEventListener("click", remove);
+
+function add() {
   let idCounter = firstTimeId + 1; // import this dynamically from initialize
 
   // create new timer div
@@ -175,4 +177,28 @@ addTimerButton.addEventListener("click", () => {
 
   // update counter
   idCounter++;
+}
+
+addTimerButton.addEventListener("touchend", (e) => {
+  add;
+  setTimeout(() => {
+    addTimerButton.classList.remove("btn2");
+  }, 300);
+});
+addTimerButton.addEventListener("click", add);
+
+window.addEventListener("load", () => {
+  function is_touch_enabled() {
+    // Check if touch is enabled
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  }
+  console.log(is_touch_enabled());
+  if (is_touch_enabled()) {
+    // If touch is not enabled, add "btn2" class
+    addTimerButton.classList.add("btn2");
+  }
 });
