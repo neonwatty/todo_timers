@@ -42,10 +42,10 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: 1;
 }
 
-.btn2 {
+.mobile-btn {
   transition: background-color 0.3s ease; /* Add transition effect */
 }
 
-.btn2:hover {
+.mobile-btn:hover {
   background-color: #ccf6c8 !important; /* Hover effect */
 }

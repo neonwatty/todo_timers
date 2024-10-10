@@ -3,6 +3,7 @@ import { resetTimerDrag } from "./drag.js";
 import { updateFocus } from "./focus.js";
 import { firstTimeId } from "./initialize.js";
 import { deleteDict } from "./localStorage.js";
+import { flickerHoverClass } from "./mobile.js";
 import { TimerFunc } from "./timer.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
@@ -167,6 +168,9 @@ function remove() {
 }
 
 removeTimerButton.addEventListener("click", remove);
+removeTimerButton.addEventListener("click", () =>
+  flickerHoverClass(removeTimerButton)
+);
 
 function add() {
   let idCounter = firstTimeId + 1; // import this dynamically from initialize
@@ -179,26 +183,7 @@ function add() {
   idCounter++;
 }
 
-addTimerButton.addEventListener("touchend", (e) => {
-  add;
-  setTimeout(() => {
-    addTimerButton.classList.remove("btn2");
-  }, 300);
-});
 addTimerButton.addEventListener("click", add);
-
-window.addEventListener("load", () => {
-  function is_touch_enabled() {
-    // Check if touch is enabled
-    return (
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0
-    );
-  }
-  console.log(is_touch_enabled());
-  if (is_touch_enabled()) {
-    // If touch is not enabled, add "btn2" class
-    addTimerButton.classList.add("btn2");
-  }
-});
+addTimerButton.addEventListener("click", () =>
+  flickerHoverClass(addTimerButton)
+);

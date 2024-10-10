@@ -4,8 +4,8 @@ import {
   stopAlertSound,
   stopFlashTitle,
 } from "./alarm.js";
-
 import { loadTimer, saveTimer } from "./localStorage.js";
+import { flickerHoverClass } from "./mobile.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 
@@ -45,9 +45,24 @@ export class TimerFunc {
 
   initialize() {
     this.startButton.addEventListener("click", () => this.start());
+    this.startButton.addEventListener("click", () =>
+      flickerHoverClass(this.startButton)
+    );
+
     this.pauseButton.addEventListener("click", () => this.pause());
+    this.pauseButton.addEventListener("click", () =>
+      flickerHoverClass(this.pauseButton)
+    );
+
     this.resetButton.addEventListener("click", () => this.reset());
+    this.resetButton.addEventListener("click", () =>
+      flickerHoverClass(this.resetButton)
+    );
+
     this.saveButton.addEventListener("click", () => this.save());
+    this.saveButton.addEventListener("click", () =>
+      flickerHoverClass(this.saveButton)
+    );
   }
 
   updateTimerMetadata(timerName, timerNotes) {
