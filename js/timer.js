@@ -258,6 +258,7 @@ export class TimerFunc {
 
           // set background of timer to red
           this.timerElement.classList.add("bg-red-400");
+          this.timerElement.blur();
 
           // re-state static values
           this.updateInternalTimeValues(0, 0, 0);
@@ -321,6 +322,12 @@ export class TimerFunc {
 
     // assign input
     this.setDynamicDash();
+
+    // reset flags
+    this.timerInterval = null;
+    this.isPlay = false;
+    this.isPaused = false;
+    this.isAlarm = false;
   }
 
   save() {
