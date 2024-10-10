@@ -2,7 +2,7 @@
 
 A free web app for creating and managing timers to organize your daily tasks. Built for mobile and desktop.
 
-[Click here to use the app in your browser](neonwatty.github.io/todo_timers/).
+[Click here to use the app right now in your browser](neonwatty.github.io/todo_timers/).
 
 Save your timers and progress and return to them any time you want.
 
