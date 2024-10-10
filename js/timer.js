@@ -5,7 +5,7 @@ import {
   stopFlashTitle,
 } from "./alarm.js";
 import { loadTimer, saveTimer } from "./localStorage.js";
-import { flickerHoverClass } from "./mobile.js";
+import { flickerHoverClass, removeHoverClassIfMobile } from "./mobile.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 
@@ -21,9 +21,9 @@ export class TimerFunc {
     this.timerPrivateName = timerPrivateName;
     this.timerElement = timerContainer.querySelector(`#${timerPrivateName}`);
     this.timerDash = this.timerElement.querySelector("#timer-dash");
-    this.timerButtons = this.timerElement.querySelector("#timer-buttons");
     this.timerMetaData = this.timerElement.querySelector("#timer-metadata");
 
+    this.timerButtons = this.timerElement.querySelector("#timer-buttons");
     this.startButton = this.timerButtons.querySelector("#start-button");
     this.pauseButton = this.timerButtons.querySelector("#pause-button");
     this.resetButton = this.timerButtons.querySelector("#reset-button");
@@ -40,10 +40,24 @@ export class TimerFunc {
     this.setDynamicDash();
 
     // add event listeners to buttons
-    this.initialize();
+    this.initializeButtons();
   }
 
-  initialize() {
+  initializeButtons() {
+    // define buttons
+    this.timerButtons = this.timerElement.querySelector("#timer-buttons");
+    this.startButton = this.timerButtons.querySelector("#start-button");
+    this.pauseButton = this.timerButtons.querySelector("#pause-button");
+    this.resetButton = this.timerButtons.querySelector("#reset-button");
+    this.saveButton = this.timerMetaData.querySelector("#save-button");
+
+    // remove hover class if user is mobile
+    removeHoverClassIfMobile(this.startButton);
+    removeHoverClassIfMobile(this.pauseButton);
+    removeHoverClassIfMobile(this.resetButton);
+    removeHoverClassIfMobile(this.saveButton);
+
+    //
     this.startButton.addEventListener("click", () => this.start());
     this.startButton.addEventListener("click", () =>
       flickerHoverClass(this.startButton)

@@ -3,7 +3,7 @@ import { resetTimerDrag } from "./drag.js";
 import { updateFocus } from "./focus.js";
 import { firstTimeId } from "./initialize.js";
 import { deleteDict } from "./localStorage.js";
-import { flickerHoverClass } from "./mobile.js";
+import { flickerHoverClass, removeHoverClassIfMobile } from "./mobile.js";
 import { TimerFunc } from "./timer.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
@@ -148,6 +148,17 @@ function createNewTimerDiv(id) {
   timerContainer.insertAdjacentHTML("beforeend", timerDiv);
 }
 
+function add() {
+  let idCounter = firstTimeId + 1; // import this dynamically from initialize
+
+  // create new timer div
+  const timerName = `my-timer-${idCounter}`;
+  createNewTimer(timerName);
+
+  // update counter
+  idCounter++;
+}
+
 function remove() {
   const focusId = updateFocus();
   const removeElement = document.getElementById(focusId);
@@ -167,23 +178,16 @@ function remove() {
   }
 }
 
+// document.addEventListener("load", () => {
+removeHoverClassIfMobile(removeTimerButton);
 removeTimerButton.addEventListener("click", remove);
 removeTimerButton.addEventListener("click", () =>
   flickerHoverClass(removeTimerButton)
 );
 
-function add() {
-  let idCounter = firstTimeId + 1; // import this dynamically from initialize
-
-  // create new timer div
-  const timerName = `my-timer-${idCounter}`;
-  createNewTimer(timerName);
-
-  // update counter
-  idCounter++;
-}
-
+removeHoverClassIfMobile(addTimerButton);
 addTimerButton.addEventListener("click", add);
 addTimerButton.addEventListener("click", () =>
   flickerHoverClass(addTimerButton)
 );
+// });
