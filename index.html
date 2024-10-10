@@ -6,12 +6,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles/styles.css" />
     <title>todo timers</title>
-    <meta name="title" content="Todo timers" />
+    <meta name="title" content="My Timers" />
     <meta
       name="description"
-      content="A simple web app for setting todo timers."
+      content="Create and manage timers to help organize and time-box your daily tasks."
     />
-    <meta name="keywords" content="todo, stopwatch, timer, todos, checklist" />
+    <meta
+      name="keywords"
+      content="todo, stopwatch, timer, todos, checklist, daily, tasks"
+    />
     <link id="favicon" rel="icon" type="image/svg+xml" href="" />
   </head>
 
@@ -60,6 +63,30 @@
         ></div>
       </div>
     </div>
+
+    <div id="overlay"></div>
+    <div id="popover">
+      <h2 class="text-2xl">Welcome to My Timers!</h2>
+
+      <p>
+        Create and manage up to 10 timers to help organize and time-box your
+        daily tasks.
+      </p>
+      <br />
+      <p>Save your timers and progress and return to them any time you want!</p>
+      <br />
+      <p>
+        All timer data - including names and notes - are stored
+        <em>locally</em> in your browser.
+      </p>
+      <br />
+      <button
+        class="w-20 h-15 rounded-full text-xl border border-slate-800 dark:border-slate-800 text-center text-slate-800 dark:text-slate-800 hover hover:bg-emerald-500 cursor-pointer active active:bg-teal-500 bg-emerald-400"
+        id="welcome-close"
+      >
+        Close
+      </button>
+    </div>
     <audio id="alertSound" src="audio/siren.mp3" preload="auto"></audio>
 
     <script src="js/initialize.js" type="module"></script>
@@ -67,5 +94,6 @@
     <script src="js/focus.js" type="module"></script>
     <script src="js/drag.js" type="module"></script>
     <script src="js/favicon.js" type="module"></script>
+    <script src="js/welcome.js" type="module"></script>
   </body>
 </html>

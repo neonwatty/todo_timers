@@ -10,6 +10,9 @@ const timerContainer = document.querySelector("#timers-inner-container");
 const addTimerButton = document.querySelector("#add-timer-button");
 const removeTimerButton = document.querySelector("#remove-timer-button");
 
+let idCounter = 0;
+let firstTimeFlag = true;
+
 export function createNewTimer(
   privateTimerName,
   timerName = "",
@@ -23,7 +26,7 @@ export function createNewTimer(
   const timerElement = timerContainer.querySelector(`#${privateTimerName}`);
 
   // if it doesn't exist create it - both the div and timer functionality
-  if (!timerElement) {
+  if (!timerElement && idCounter < 10) {
     // create new div
     createNewTimerDiv(privateTimerName);
 
@@ -149,7 +152,10 @@ function createNewTimerDiv(id) {
 }
 
 function add() {
-  let idCounter = firstTimeId + 1; // import this dynamically from initialize
+  if (firstTimeFlag) {
+    idCounter = firstTimeId + 1;
+    firstTimeFlag = false;
+  }
 
   // create new timer div
   const timerName = `my-timer-${idCounter}`;
