@@ -1,6 +1,8 @@
 # My timers
 
-A free web app for creating and managing timers to organize your daily tasks. Built for mobile and desktop.
+I always find time-boxing daily tasks a helpful constraint towards getting shit done.
+
+So I made this free web app for creating and managing timers to organize daily tasks.  Built for mobile and desktop.
 
 <img align="center" src="https://github.com/jermwatt/readme_gifs/blob/main/my_timers_demo.gif" height="325">
 
