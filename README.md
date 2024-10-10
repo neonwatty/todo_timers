@@ -1,4 +1,4 @@
-# My timers
+# Timebox your shit and get it done
 
 I always find time-boxing daily tasks a helpful constraint towards getting shit done.
 
