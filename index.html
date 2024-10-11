@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/output.css" />
     <title>My timers</title>
@@ -31,6 +31,7 @@
               type="image/svg+xml"
               src="images/stopwatch-light.svg"
               width="45rem"
+              alt="nav icon"
             />
           </div>
         </div>
@@ -45,6 +46,7 @@
             src="images/github-mark-white.svg"
             width="40rem"
             style="float: left"
+            alt="github icon"
           />
         </a>
       </div>
@@ -111,5 +113,10 @@
     <script src="js/drag.js" type="module"></script>
     <script src="js/favicon.js" type="module"></script>
     <script src="js/welcome.js" type="module"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("js/service-worker.js");
+      }
+    </script>
   </body>
 </html>
