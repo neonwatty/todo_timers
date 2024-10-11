@@ -6,8 +6,8 @@ So I made this simple app for creating and managing timers for daily todos. You 
 
 Save your timers and progress and return to them any time you want.
 
-All timer data - including names and notes - are stored
-<em>locally</em> in your browser.
+All timer data - including names and notes - is stored
+<em>locally</em> (and <em>only</em> locally) in your browser.
 
 Built for mobile and desktop.
 
