@@ -248,7 +248,7 @@ export class TimerFunc {
           this.save();
         }
 
-        if (distance <= 0) {
+        if (distance <= 999) {
           clearInterval(this.timerInterval);
           this.isAlarm = true;
 
