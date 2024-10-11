@@ -56,6 +56,34 @@
       "sizes": "738x542",
       "type": "image/png",
       "label": "Move timer",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshots/my_timers_demo_1.png",
+      "sizes": "738x542",
+      "type": "image/png",
+      "label": "Create new timer",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/my_timers_demo_2.png",
+      "sizes": "738x542",
+      "type": "image/png",
+      "label": "Enter timer data",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/my_timers_demo_3.png",
+      "sizes": "738x542",
+      "type": "image/png",
+      "label": "Move timer",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/my_timers_demo_4.png",
+      "sizes": "738x542",
+      "type": "image/png",
+      "label": "Move timer",
       "form_factor": "narrow"
     }
   ],
