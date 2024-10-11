@@ -2,7 +2,7 @@
   "short_name": "Todo timers",
   "name": "Todo timers",
   "description": "A free app for creating and managing timers to organize your daily todos. Timebox your todos and get em done.",
-  "start_url": "/my_timers",
+  "start_url": "/todo_timers",
   "icons": [
     {
       "src": "icons/manifest-icon-192.maskable.png",
