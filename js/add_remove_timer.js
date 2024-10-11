@@ -120,20 +120,20 @@ function createNewTimerDiv(id) {
               <div
                 class="flex flex-col w-2/3 p-2"
               >
-                <label for="name">Name:</label>
+                <label for="timer-name">Name:</label>
                 <input
                   type="text"
                   id="timer-name"
-                  name="name"
+                  name="timer-name"
                   minlength="0"
                   maxlength="30"
                   class="bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-200 mb-2"
                 />
-                <label for="notes">Notes:</label>
+                <label for="timer-notes">Notes:</label>
                 <textarea
                   type="text"
                   id="timer-notes"
-                  name="notes"
+                  name="timer-notes"
                   rows=1
                   class="h-full bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-200 text-left"
                 ></textarea>
