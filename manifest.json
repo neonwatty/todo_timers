@@ -14,18 +14,17 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "add_remove_timer.js",
-        "favicon.js",
-        "alarm.js",
-        "focus.js",
-        "timer.js",
-        "blur.js",
-        "initialize.js",
-        "welcome.js",
-        "control.js",
-        "localStorage.js",
-        "drag.js",
-        "mobile.js"
+        "js/add_remove_timer.js",
+        "js/favicon.js",
+        "js/alarm.js",
+        "js/focus.js",
+        "js/timer.js",
+        "js/blur.js",
+        "js/initialize.js",
+        "js/welcome.js",
+        "js/localStorage.js",
+        "js/drag.js",
+        "js/mobile.js"
       ],
       "css": ["styles/input.css", "styles/output.css", "styles/styles.css"]
     }
