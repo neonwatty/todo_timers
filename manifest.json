@@ -1,95 +1,33 @@
 {
-  "short_name": "Todo timers",
+  "manifest_version": 3,
   "name": "Todo timers",
   "description": "A free app for creating and managing timers to organize your daily todos. Timebox your todos and get em done.",
-  "start_url": "/todo_timers",
-  "icons": [
+  "version": "1.0.1",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icons/manifest-icon-512.maskable.png"
+  },
+  "background": {
+    "service_worker": "js/service-worker.js"
+  },
+  "content_scripts": [
     {
-      "src": "icons/manifest-icon-192.maskable.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icons/manifest-icon-192.maskable.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/manifest-icon-512.maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icons/manifest-icon-512.maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "matches": ["<all_urls>"],
+      "js": [
+        "add_remove_timer.js",
+        "favicon.js",
+        "alarm.js",
+        "focus.js",
+        "timer.js",
+        "blur.js",
+        "initialize.js",
+        "welcome.js",
+        "control.js",
+        "localStorage.js",
+        "drag.js",
+        "mobile.js"
+      ],
+      "css": ["styles/input.css", "styles/output.css", "styles/styles.css"]
     }
-  ],
-  "screenshots": [
-    {
-      "src": "screenshots/my_timers_demo_1.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Create new timer",
-      "form_factor": "wide"
-    },
-    {
-      "src": "screenshots/my_timers_demo_2.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Enter timer data",
-      "form_factor": "wide"
-    },
-    {
-      "src": "screenshots/my_timers_demo_3.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Move timer",
-      "form_factor": "wide"
-    },
-    {
-      "src": "screenshots/my_timers_demo_4.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Move timer",
-      "form_factor": "wide"
-    },
-    {
-      "src": "screenshots/my_timers_demo_1.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Create new timer",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "screenshots/my_timers_demo_2.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Enter timer data",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "screenshots/my_timers_demo_3.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Move timer",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "screenshots/my_timers_demo_4.png",
-      "sizes": "738x542",
-      "type": "image/png",
-      "label": "Move timer",
-      "form_factor": "narrow"
-    }
-  ],
-  "display": "fullscreen",
-  "theme_color": "#ffffff",
-  "background_color": "#000000",
-  "orientation": "portrait",
-  "version": "1.0.1"
+  ]
 }
