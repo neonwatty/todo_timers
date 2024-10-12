@@ -6,16 +6,16 @@ on:
   push:
     branches: ["main"]
     paths-ignore:
-      - '**/README.md'
-      - '**/CONTRIBUTING.md'
-      - '**LICENSE'
-      
+      - "**/README.md"
+      - "**/CONTRIBUTING.md"
+      - "**LICENSE"
+
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**/README.md'
-      - '**/CONTRIBUTING.md'
-      - '**LICENSE'
+      - "**/README.md"
+      - "**/CONTRIBUTING.md"
+      - "**LICENSE"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: "."
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

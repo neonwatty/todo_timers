@@ -5,8 +5,22 @@ on:
   pull_request:
     branches: [main, master]
 jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install prettier
+      - name: Run Prettier Check
+        run: npx prettier --check .
+
   test:
-    timeout-minutes: 60
+    timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
