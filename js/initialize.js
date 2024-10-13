@@ -1,12 +1,12 @@
 import { createNewTimer } from "./add_remove_timer.js";
 import { resetTimerBlurEvents } from "./blur.js";
 import { resetTimerDrag } from "./drag.js";
-import { loadDict } from "./localStorage.js";
+import { loadDict } from "./storage.js";
 let firstTimeId = 1;
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   // load in timers from local storage
-  const savedTimers = loadDict();
+  const savedTimers = await loadDict();
 
   // loop through savedTimers and load into timers
   if (Object.keys(savedTimers).length > 0) {

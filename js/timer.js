@@ -4,8 +4,8 @@ import {
   stopAlertSound,
   stopFlashTitle,
 } from "./alarm.js";
-import { loadTimer, saveTimer } from "./localStorage.js";
 import { flickerHoverClass, removeHoverClassIfMobile } from "./mobile.js";
+import { loadTimer, saveTimer } from "./storage.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
 
@@ -330,7 +330,7 @@ export class TimerFunc {
     this.isAlarm = false;
   }
 
-  save() {
+  async save() {
     if (this.isPaused || !this.isPlay) {
       // save values from dynamic dash
       this.recordDynamicDashValues();
@@ -354,12 +354,12 @@ export class TimerFunc {
     };
 
     // get timerPrivateName
-    saveTimer(this.timerPrivateName, timerSaveData);
+    await saveTimer(this.timerPrivateName, timerSaveData);
   }
 
-  reload() {
+  async reload() {
     // re-load data from local storage using private name
-    let timerData = loadTimer(this.timerPrivateName);
+    let timerData = await loadTimer(this.timerPrivateName);
 
     // re-assign all data to timer entries
     this.updateTimerMetadata(timerData.timerName, timerData.timerNotes);

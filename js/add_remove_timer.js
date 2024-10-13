@@ -2,8 +2,8 @@ import { resetTimerBlurEvents } from "./blur.js";
 import { resetTimerDrag } from "./drag.js";
 import { updateFocus } from "./focus.js";
 import { firstTimeId } from "./initialize.js";
-import { deleteDict } from "./localStorage.js";
 import { flickerHoverClass, removeHoverClassIfMobile } from "./mobile.js";
+import { deleteDict } from "./storage.js";
 import { TimerFunc } from "./timer.js";
 
 const timerContainer = document.querySelector("#timers-inner-container");
@@ -165,12 +165,12 @@ function add() {
   idCounter++;
 }
 
-function remove() {
+async function remove() {
   const focusId = updateFocus();
   const removeElement = document.getElementById(focusId);
   if (removeElement) {
     // delete element data from local storage
-    deleteDict(focusId);
+    await deleteDict(focusId);
 
     // delete element div
     removeElement.classList.add("fade-out");
