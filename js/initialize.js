@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
         value.timerNotes,
         value.hoursToAdd,
         value.minutesToAdd,
-        value.secondsToAdd,
+        value.secondsToAdd
       );
     });
   } else {

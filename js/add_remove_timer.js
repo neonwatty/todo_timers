@@ -19,7 +19,7 @@ export function createNewTimer(
   timerNotes = "",
   hoursToAdd = 0,
   minutesToAdd = 0,
-  secondsToAdd = 0,
+  secondsToAdd = 0
 ) {
   // create id namespace
   const timerContainer = document.querySelector("#timers-inner-container");
@@ -37,7 +37,7 @@ export function createNewTimer(
       timerNotes,
       hoursToAdd,
       minutesToAdd,
-      secondsToAdd,
+      secondsToAdd
     );
 
     // reset blur and drag events for timers
@@ -188,12 +188,12 @@ function remove() {
 removeHoverClassIfMobile(removeTimerButton);
 removeTimerButton.addEventListener("click", remove);
 removeTimerButton.addEventListener("click", () =>
-  flickerHoverClass(removeTimerButton),
+  flickerHoverClass(removeTimerButton)
 );
 
 removeHoverClassIfMobile(addTimerButton);
 addTimerButton.addEventListener("click", add);
 addTimerButton.addEventListener("click", () =>
-  flickerHoverClass(addTimerButton),
+  flickerHoverClass(addTimerButton)
 );
 // });

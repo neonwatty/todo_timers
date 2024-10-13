@@ -16,7 +16,7 @@ export class TimerFunc {
     timerNotes = "",
     hoursToAdd = 0,
     minutesToAdd = 0,
-    secondsToAdd = 0,
+    secondsToAdd = 0
   ) {
     this.timerPrivateName = timerPrivateName;
     this.timerElement = timerContainer.querySelector(`#${timerPrivateName}`);
@@ -60,22 +60,22 @@ export class TimerFunc {
     //
     this.startButton.addEventListener("click", () => this.start());
     this.startButton.addEventListener("click", () =>
-      flickerHoverClass(this.startButton),
+      flickerHoverClass(this.startButton)
     );
 
     this.pauseButton.addEventListener("click", () => this.pause());
     this.pauseButton.addEventListener("click", () =>
-      flickerHoverClass(this.pauseButton),
+      flickerHoverClass(this.pauseButton)
     );
 
     this.resetButton.addEventListener("click", () => this.reset());
     this.resetButton.addEventListener("click", () =>
-      flickerHoverClass(this.resetButton),
+      flickerHoverClass(this.resetButton)
     );
 
     this.saveButton.addEventListener("click", () => this.save());
     this.saveButton.addEventListener("click", () =>
-      flickerHoverClass(this.saveButton),
+      flickerHoverClass(this.saveButton)
     );
   }
 
@@ -222,7 +222,7 @@ export class TimerFunc {
     const countDownDate = addTime(
       this.hoursToAdd,
       this.minutesToAdd,
-      this.secondsToAdd,
+      this.secondsToAdd
     );
 
     // create interal timer
@@ -232,7 +232,7 @@ export class TimerFunc {
         let distance = countDownDate - now;
 
         let hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         );
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -366,7 +366,7 @@ export class TimerFunc {
     this.updateInternalTimeValues(
       timerData.hoursToAdd,
       timerData.minutesToAdd,
-      timerData.secondsToAdd,
+      timerData.secondsToAdd
     );
   }
 }

@@ -4,29 +4,14 @@
   "description": "A free app for creating and managing timers to organize your daily todos. Timebox your todos and get em done.",
   "version": "1.0.1",
   "action": {
-    "default_popup": "index.html",
+    "default_title": "Click to open panel",
     "default_icon": "icons/manifest-icon-512.maskable.png"
+  },
+  "side_panel": {
+    "default_path": "index.html"
   },
   "background": {
     "service_worker": "js/service-worker.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": [
-        "js/add_remove_timer.js",
-        "js/favicon.js",
-        "js/alarm.js",
-        "js/focus.js",
-        "js/timer.js",
-        "js/blur.js",
-        "js/initialize.js",
-        "js/welcome.js",
-        "js/localStorage.js",
-        "js/drag.js",
-        "js/mobile.js"
-      ],
-      "css": ["styles/input.css", "styles/output.css", "styles/styles.css"]
-    }
-  ]
+  "permissions": ["sidePanel", "storage"]
 }
