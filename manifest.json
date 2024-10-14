@@ -11,7 +11,8 @@
     "default_path": "index.html"
   },
   "background": {
-    "service_worker": "js/service-worker.js"
+    "service_worker": "js/service-worker.js",
+    "type": "module"
   },
   "permissions": ["sidePanel", "storage", "alarms"]
 }
