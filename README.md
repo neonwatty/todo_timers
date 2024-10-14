@@ -9,7 +9,7 @@ Save your timers and progress and return to them any time you want.
 All timer data - including names and notes - is stored
 <em>locally</em> (and <em>only</em> locally) in your browser.
 
-Built for mobile and desktop.
+Built for desktop - and installable as a Progressive Web App (PWA) on your desktop.
 
 <img align="center" src="https://github.com/jermwatt/readme_gifs/blob/main/my_timers_demo.gif" height="325">
 
